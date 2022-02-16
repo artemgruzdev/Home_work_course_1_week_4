@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Home work course 1 week 4</string>
+    <string name="setting">Настройки</string>
+    <string name="search">Поиск</string>
+    <string name="exit">Выход</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="setting_google">Google</string>
+    <string name="setting_yandex">Яндекс</string>
+    <string name="setting_bing">Bing</string>
+    <string name="hint_search_et">Введите текст</string>
+    <string name="btn_search">Найти в интернете</string>
+</resources>
