@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,8 +68,6 @@ public class FragmentSearch extends Fragment {
     void loadInSearch() {
         fragmentSetting.sharedPreferences = Objects.requireNonNull(getActivity()).getPreferences(Context.MODE_PRIVATE);
         savedInSearch = fragmentSetting.sharedPreferences.getString(fragmentSetting.SAVED_TEXT, "");
-        Toast.makeText(getActivity(), savedInSearch, Toast.LENGTH_LONG).show();
-
     }
 
 }
