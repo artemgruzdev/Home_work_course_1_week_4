@@ -12,9 +12,11 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    FragmentStart fragmentStart;
     FragmentSetting fragmentSetting;
     FragmentSearch fragmentSearch;
     FragmentTransaction fragmentTransaction;
+
 
 
     @Override
@@ -22,8 +24,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        fragmentStart = new FragmentStart();
         fragmentSetting = new FragmentSetting();
         fragmentSearch = new FragmentSearch();
+
+        if (fragmentStart != null) {
+            fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.add(R.id.frame_layout_fragment, fragmentStart);
+            fragmentTransaction.commit();
+        }
     }
 
     @Override

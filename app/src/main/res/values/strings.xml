@@ -10,4 +10,5 @@
     <string name="setting_bing">Bing</string>
     <string name="hint_search_et">Введите текст</string>
     <string name="btn_search">Найти в интернете</string>
+    <string name="text_in_fragment_start">Приложение для поиска в интернете. Перейдите в настройке и выберете поисковик, затем перейдите в раздел поиск и введите текст. При нажатие на кнопку заданный текст будет найдет в выбранном вами поисковике</string>
 </resources>

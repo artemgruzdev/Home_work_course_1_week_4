@@ -7,12 +7,19 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-public class FragmentExit extends Fragment {
+public class FragmentStart extends Fragment {
+
+    TextView tvStartText;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View v = inflater.inflate(R.layout.fragment_start, null);
+
+        tvStartText = v.findViewById(R.id.fragment_start_tv);
+
+        return v;
     }
 }
