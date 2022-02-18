@@ -3,6 +3,7 @@ package ru.startandroid.homeworkcourse1week4;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,35 +21,32 @@ import java.util.Objects;
 
 public class FragmentSearch extends Fragment {
 
-    FragmentSetting fragmentSetting = new FragmentSetting();
-
     EditText etSearch;
     Button btnSearch;
     String savedInSearch;
-    String textSearch;
-    Intent intent;
 
 
     View.OnClickListener mBtnSearchOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            textSearch = etSearch.getText().toString();
             switch (savedInSearch) {
-                case "google":
-                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/search?q=" + textSearch));
-                    startActivity(intent);
+                case Settings.GOOGLE:
+                    openActivity(Settings.LINK_GOOGLE);
                     break;
-                case "yandex":
-                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://yandex.ru/search/?text=" + textSearch));
-                    startActivity(intent);
+                case Settings.YANDEX:
+                    openActivity(Settings.LINK_YANDEX);
                     break;
-                case "bing":
-                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.bing.com/search?q=" + textSearch));
-                    startActivity(intent);
+                case Settings.BING:
+                    openActivity(Settings.LINK_BING);
                     break;
             }
         }
     };
+
+    private void openActivity(String string_link) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(string_link + etSearch.getText().toString()));
+        startActivity(intent);
+    }
 
     @Nullable
     @Override
@@ -66,8 +64,9 @@ public class FragmentSearch extends Fragment {
     }
 
     void loadInSearch() {
-        fragmentSetting.sharedPreferences = Objects.requireNonNull(getActivity()).getPreferences(Context.MODE_PRIVATE);
-        savedInSearch = fragmentSetting.sharedPreferences.getString(fragmentSetting.SAVED_TEXT, "");
+        SharedPreferences sharedPreferences;
+        sharedPreferences = Objects.requireNonNull(getActivity()).getPreferences(Context.MODE_PRIVATE);
+        savedInSearch = sharedPreferences.getString(Settings.SAVED_TEXT, "");
     }
 
 }

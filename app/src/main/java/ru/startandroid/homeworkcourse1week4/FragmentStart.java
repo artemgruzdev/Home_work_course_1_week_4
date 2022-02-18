@@ -11,15 +11,12 @@ import android.widget.TextView;
 
 public class FragmentStart extends Fragment {
 
-    TextView tvStartText;
+    public static final String TAG = "FragmentStart";
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_start, null);
 
-        tvStartText = v.findViewById(R.id.fragment_start_tv);
-
-        return v;
+        return inflater.inflate(R.layout.fragment_start, null);
     }
 }

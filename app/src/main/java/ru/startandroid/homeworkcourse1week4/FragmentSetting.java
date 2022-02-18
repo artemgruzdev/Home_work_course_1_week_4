@@ -23,11 +23,9 @@ public class FragmentSetting extends Fragment {
     RadioButton rbYandex;
     RadioButton rbBing;
 
-    public SharedPreferences sharedPreferences;
 
     public static String inSearch;
 
-    final String SAVED_TEXT = "saved_text";
 
 
     @Nullable
@@ -40,25 +38,25 @@ public class FragmentSetting extends Fragment {
         rbYandex = v.findViewById(R.id.rb_yandex);
         rbBing = v.findViewById(R.id.rb_bing);
 
-        rgSetting.setOnCheckedChangeListener(rgOnCheckedChangedListener1);
+        rgSetting.setOnCheckedChangeListener(rgOnCheckedChangedListener);
         loadRadioButton();
 
         return v;
     }
 
-    RadioGroup.OnCheckedChangeListener rgOnCheckedChangedListener1 = new RadioGroup.OnCheckedChangeListener() {
+    RadioGroup.OnCheckedChangeListener rgOnCheckedChangedListener = new RadioGroup.OnCheckedChangeListener() {
         @SuppressLint("NonConstantResourceId")
         @Override
         public void onCheckedChanged(RadioGroup radioGroup, int i) {
             switch (radioGroup.getCheckedRadioButtonId()) {
                 case R.id.rb_google:
-                    inSearch = "google";
+                    inSearch = Settings.GOOGLE;
                     break;
                 case R.id.rb_yandex:
-                    inSearch = "yandex";
+                    inSearch = Settings.YANDEX;
                     break;
                 case R.id.rb_bing:
-                    inSearch = "bing";
+                    inSearch = Settings.BING;
                     break;
                 default:
                     break;
@@ -68,28 +66,31 @@ public class FragmentSetting extends Fragment {
 
 
     void saveInSearch() {
+        SharedPreferences sharedPreferences;
         sharedPreferences = Objects.requireNonNull(getActivity()).getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(SAVED_TEXT, inSearch);
+        editor.putString(Settings.SAVED_TEXT, inSearch);
         editor.apply();
     }
 
 
     public void saveRadioButton() {
+        SharedPreferences sharedPreferences;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("google", rbGoogle.isChecked());
-        editor.putBoolean("yandex", rbYandex.isChecked());
-        editor.putBoolean("bing", rbBing.isChecked());
+        editor.putBoolean(Settings.GOOGLE, rbGoogle.isChecked());
+        editor.putBoolean(Settings.YANDEX, rbYandex.isChecked());
+        editor.putBoolean(Settings.BING, rbBing.isChecked());
         editor.apply();
 
     }
 
     public void loadRadioButton() {
+        SharedPreferences sharedPreferences;
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        rbGoogle.setChecked(sharedPreferences.getBoolean("google", false));
-        rbYandex.setChecked(sharedPreferences.getBoolean("yandex", false));
-        rbBing.setChecked(sharedPreferences.getBoolean("bing", false));
+        rbGoogle.setChecked(sharedPreferences.getBoolean(Settings.GOOGLE, false));
+        rbYandex.setChecked(sharedPreferences.getBoolean(Settings.YANDEX, false));
+        rbBing.setChecked(sharedPreferences.getBoolean(Settings.BING, false));
     }
 
 

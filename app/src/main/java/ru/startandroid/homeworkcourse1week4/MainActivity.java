@@ -13,9 +13,6 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     FragmentStart fragmentStart;
-    FragmentSetting fragmentSetting;
-    FragmentSearch fragmentSearch;
-    FragmentTransaction fragmentTransaction;
 
 
 
@@ -25,13 +22,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         fragmentStart = new FragmentStart();
-        fragmentSetting = new FragmentSetting();
-        fragmentSearch = new FragmentSearch();
 
-        if (fragmentStart != null) {
-            fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.add(R.id.frame_layout_fragment, fragmentStart);
-            fragmentTransaction.commit();
+        if (getFragmentManager().findFragmentByTag(FragmentStart.TAG) == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.frame_layout_fragment, new FragmentStart(), FragmentStart.TAG).commit();
         }
     }
 
@@ -42,25 +36,25 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    @SuppressLint("NonConstantResourceId")
+    @SuppressLint({"NonConstantResourceId", "CommitTransaction"})
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         switch (item.getItemId()) {
             case R.id.menu_setting:
-                Toast.makeText(this, "Настройки", Toast.LENGTH_LONG).show();
-                fragmentTransaction.replace(R.id.frame_layout_fragment, fragmentSetting);
+                Toast.makeText(this, Settings.SETTING, Toast.LENGTH_LONG).show();
+                fragmentTransaction.replace(R.id.frame_layout_fragment, new FragmentSetting());
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
                 break;
             case R.id.menu_search:
-                Toast.makeText(this, "Поиск", Toast.LENGTH_LONG).show();
-                fragmentTransaction.replace(R.id.frame_layout_fragment, fragmentSearch);
+                Toast.makeText(this, Settings.SEARCH, Toast.LENGTH_LONG).show();
+                fragmentTransaction.replace(R.id.frame_layout_fragment, new FragmentSearch());
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
                 break;
             case R.id.menu_exit:
-                Toast.makeText(this, "Выход", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, Settings.EXIT, Toast.LENGTH_LONG).show();
                 finish();
                 break;
             default:
