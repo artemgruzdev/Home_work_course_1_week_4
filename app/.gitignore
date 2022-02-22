@@ -1,1 +1,10 @@
-/build
+.gradle
+/local.properties
+**/build
+**.iml
+**/.idea
+**/com_crashlytics_export_strings.xml
+**/crashlytics-build.properties
+.DS_Store
+.out
+*.li
